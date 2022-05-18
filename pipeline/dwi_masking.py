@@ -211,7 +211,7 @@ def normalize(b0_resampled, percentile, data_n):
     output_name = case_name[:len(case_name) - (len(SUFFIX_NIFTI_GZ) + 1)] + '-normalized.nii.gz'
     output_file = path.join(path.dirname(input_file), output_name)
     img = nib.load(b0_resampled)
-    imgU16 = img.get_data().astype(np.float32)
+    imgU16 = img.get_fdata().astype(np.float32)
     p = np.percentile(imgU16, percentile)
     data = imgU16 / p
     data[data > 1] = 1
@@ -312,7 +312,7 @@ def npy_to_nifti(b0_normalized_cases, cases_mask_arr, sub_name, view='default', 
         print(output_mask_filtered)
         img = nib.load(output_mask_filtered)
         data_dwi = nib.load(sub_name[i])
-        imgU16 = img.get_data().astype(np.uint8)
+        imgU16 = img.get_fdata().astype(np.uint8)
 
         brain_mask_file = subject_name[:len(subject_name) - (len(format) + 1)] + '-' + view + '_BrainMask.nii.gz'
         brain_mask_final = path.join(output_dir, brain_mask_file)
@@ -463,7 +463,7 @@ def pre_process(input_file, target_list, b0_threshold=50.):
             print("Extracting b0 volume...")
             bvals= np.array(read_bvals(input_file.split('.nii')[0]+ '.bval'))
             where_b0= np.where(bvals <= b0_threshold)[0]
-            b0= dwi.get_data()[...,where_b0].mean(-1)
+            b0= dwi.get_fdata()[...,where_b0].mean(-1)
         else:
             print("Loading b0 volume...")
             b0= dwi.get_fdata()
@@ -662,7 +662,7 @@ or MRtrix3 maskfilter (mrtrix)''')
             count = 0
             for b0_nifti in data_n:
                 img = nib.load(b0_nifti)
-                imgU16_sagittal = img.get_data().astype(np.float32)  # sagittal view
+                imgU16_sagittal = img.get_fdata().astype(np.float32)  # sagittal view
                 imgU16_coronal = np.swapaxes(imgU16_sagittal, 0, 1)  # coronal view
                 imgU16_axial = np.swapaxes(imgU16_sagittal, 0, 2)    # Axial view
 
