@@ -11,7 +11,9 @@ with warnings.catch_warnings():
 import keras
 from keras.models import Model
 from keras.layers import Input, concatenate, Conv2D, MaxPooling2D, Activation, UpSampling2D,Dropout,Conv2DTranspose,add,multiply
-from keras.layers.normalization import BatchNormalization as bn
+# from keras.layers.normalization import BatchNormalization as bn
+from tensorflow.keras.layers import BatchNormalization as bn
+
 from keras.optimizers import RMSprop, Adam
 from keras import regularizers, losses, backend as K
 from keras.callbacks import EarlyStopping, ModelCheckpoint, CSVLogger, ModelCheckpoint, TensorBoard

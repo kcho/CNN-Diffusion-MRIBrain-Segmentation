@@ -73,7 +73,9 @@ from keras import losses
 from keras.models import Model
 from keras.layers import Input, concatenate, Conv2D, MaxPooling2D, \
     Activation, UpSampling2D, Dropout, Conv2DTranspose, add, multiply
-from keras.layers.normalization import BatchNormalization as bn
+# from keras.layers.normalization import BatchNormalization as bn
+from tensorflow.keras.layers import BatchNormalization as bn
+
 from keras.callbacks import ModelCheckpoint, TensorBoard
 from keras.optimizers import RMSprop
 from keras import regularizers
