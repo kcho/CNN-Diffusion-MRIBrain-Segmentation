@@ -5,8 +5,8 @@ import sys
 import warnings
 with warnings.catch_warnings():
     warnings.filterwarnings("ignore", category=FutureWarning)
-     import tensorflow.compat.v1 as tf
-     tf.disable_v2_behavior()
+    import tensorflow.compat.v1 as tf
+    tf.disable_v2_behavior()
     
 import keras
 from keras.models import Model
